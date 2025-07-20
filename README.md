@@ -38,6 +38,15 @@ ls -al ./linux/build/vmlinux ./linux/build/arch/arm64/boot/Image
 ```
 - vmlinux: for GDB debugging symbol
 - Image: for boot
+## Download file for run virtual linux on host
+```zsh
+# zsh - host
+# Download file for run virtual linux
+cd kernel_file
+./get_file.sh
+```
+- 2025-05-13-raspios-bookworm-arm64-lite.qcow2: Virtual Disk Image
+- Image: Builded Kernel Image from container
 ## Run QEMU using builded kernel
 ### default
 ```zsh
@@ -48,10 +57,20 @@ ls -al ./linux/build/vmlinux ./linux/build/arch/arm64/boot/Image
 ```zsh
 # zsh - host
 ./run_qemu_for_passwd.sh
+## how to passwd DEFAULT USER
+## why? /dev/vda2 -> -append "console=ttyAMA0 root=/dev/vda2 rw init=/bin/bash"
+### init=/bin/bash -> direct shell booting for passwd
+# mount -o remount,rw /dev/vda2 /
+## [  151.840967] EXT4-fs (vda2): re-mounted d4cc7d63-da78-48ad-9bdd-64ffbba449a8.
+# root@(none):/# passwd pi
+## New password:
+## Retype new password:
+## passwd: password updated successfully
+# root@(none):/# sync
+## kill qemu process (Ctrl+C in the QEMU terminal)
 ```
 ### for gdb
 ```zsh
-# zsh - host
 ./run_qemu_for_gdb.sh
 ## Starting QEMU with image: ./kernel_file/
 ## 2025-05-13-raspios-bookworm-arm64-lite.qcow2
@@ -59,7 +78,7 @@ ls -al ./linux/build/vmlinux ./linux/build/arch/arm64/boot/Image
 ## char device redirected to /dev/ttys005 (label serial0)
 ### (optional) connect to virtual linux
 ## another terminal
-screen /dev/ttys005 
+screen /dev/ttys??? # ex) check in QEMU output: char device redirected to /dev/ttys005 (label serial0)
 ```
 ## Run GDB in Container
 - another terminal
