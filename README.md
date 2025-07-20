@@ -16,6 +16,9 @@ This repository provides a setup for kernel debugging on a Mac mini(2024, arm64)
  This setup uses port 8000 on the host machine for accessing kernel build artifacts from within the Docker container via a simple web server.
 Please ensure this port is available or adjust your Docker port mapping if necessary.
 
+# Source Code
+- https://github.com/raspberrypi/linux/archive/refs/tags/stable_20250702.tar.gz
+
 # Run Step
 ## Install Qemu, Docker
 ## Run Docker Container for build kernel
