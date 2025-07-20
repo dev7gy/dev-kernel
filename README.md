@@ -79,6 +79,7 @@ cd kernel_file
 ```
 ### for gdb
 ```zsh
+# zsh - host
 ./run_qemu_for_gdb.sh
 ## Starting QEMU with image: ./kernel_file/
 ## 2025-05-13-raspios-bookworm-arm64-lite.qcow2
