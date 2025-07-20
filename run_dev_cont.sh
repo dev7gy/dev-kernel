@@ -22,6 +22,7 @@ else
 fi
 
 # Run Container
+# 8000 is port for web server (Download files from container)
 docker run --rm --name ${CONTAINER_NAME} -d -p 8000:8000 \
     -v ${VOLUME_NAME}:/home/${VOLUME_NAME} \
     ${IMG_NAME}

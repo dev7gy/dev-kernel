@@ -12,6 +12,10 @@ This repository provides a setup for kernel debugging on a Mac mini(2024, arm64)
 - Docker version 28.0.4, build b8034c0
 - QEMU emulator version 10.0.2
 
+### Port Usage
+ This setup uses port 8000 on the host machine for accessing kernel build artifacts from within the Docker container via a simple web server.
+Please ensure this port is available or adjust your Docker port mapping if necessary.
+
 # Run Step
 ## Install Qemu, Docker
 ## Run Docker Container for build kernel
@@ -47,6 +51,10 @@ cd kernel_file
 ```
 - 2025-05-13-raspios-bookworm-arm64-lite.qcow2: Virtual Disk Image
 - Image: Builded Kernel Image from container
+### How it works?
+- Port Exposure: The Dockerfile includes EXPOSE 8000, signaling that the container will listen on port 8000.
+- Web Server: The CMD ["python3", "-m", "http.server", "8000"] command automatically starts a lightweight Python HTTP server on port 8000 when the container runs. This server serves files from the container's current working directory (where the kernel is built).
+- if you want to download file in container, you can use simple web server without using 'docker cp'.(localhost:8000)
 ## Run QEMU using builded kernel
 ### default
 ```zsh
